@@ -5,6 +5,7 @@ import "./App.css";
 
 import { HomePage } from "./components/HomePage";
 import { RandomPage } from "./components/RandomPage";
+import { GamePage } from "./components/GamePage";
 
 function App() {
   const [gamesList, setGamesList] = useState(TEST_GAMES);
@@ -24,6 +25,7 @@ function App() {
           path="/random"
           element={<RandomPage gamesList={gamesList} />}
         ></Route>
+        <Route path="/games/:gameId" element={<GamePage gamesList={gamesList}/>}></Route>
       </Routes>
     </div>
   );
