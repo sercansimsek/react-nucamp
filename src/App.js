@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import { GameCard } from "./components/GameCard";
 
@@ -23,11 +24,41 @@ const gamesList = [
 ];
 
 function App() {
+  const [categoryFilter, setCategoryFilter] = useState("Fun");
+
+  let filteredGames;
+  if (categoryFilter === "All") {
+    filteredGames = gamesList;
+  } else {
+    filteredGames = gamesList.filter(
+      (game) => game.category === categoryFilter,
+    );
+  }
   return (
     <div className="App">
       <h1>My Board Games</h1>
-      {gamesList.map((game) => (
-        <GameCard game={game} key={game.id}/>
+      <div>
+        <button
+          className="btn btn-primary me-2"
+          onClick={() => setCategoryFilter("All")}
+        >
+          All
+        </button>
+        <button
+          className="btn btn-primary me-2"
+          onClick={() => setCategoryFilter("Fun")}
+        >
+          Fun
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => setCategoryFilter("Deck Building")}
+        >
+          Deck Building
+        </button>
+      </div>
+      {filteredGames.map((game) => (
+        <GameCard game={game} key={game.id} />
       ))}
     </div>
   );
